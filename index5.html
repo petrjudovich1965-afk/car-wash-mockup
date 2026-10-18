@@ -38,6 +38,17 @@
         .btn-block { width: 100%; font-size: 1.1rem; }
         .close { position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer; }
     </style>
+    <script>
+        function openModal() {
+            document.getElementById("booking-modal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("booking-modal").style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("booking-modal")) closeModal();
+        }
+    </script>
 </head>
 <body>
 
@@ -155,11 +166,6 @@
 </footer>
 
 <script>
-    const modal = document.getElementById("booking-modal");
-    function openModal() { modal.style.display = "block"; }
-    function closeModal() { modal.style.display = "none"; }
-    window.onclick = function(event) { if (event.target == modal) closeModal(); }
-
     document.getElementById('appointment-form').onsubmit = function(e) {
             e.preventDefault();
             alert("Заявка принята! Данные готовы для отправки.");
