@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDetail — Премиальная мойка и детейлинг</title>
+    <style>
+        :root { --primary: #2563eb; --dark: #1e293b; --light: #f8fafc; --whatsapp: #25d366; --telegram: #0088cc; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; color: var(--dark); line-height: 1.6; }
+        header { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); }
+        nav a { margin-left: 20px; text-decoration: none; color: var(--dark); font-weight: 500; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1950&q=80'); background-size: cover; color: white; padding: 100px 5%; text-align: center; }
+        .btn { padding: 12px 25px; border-radius: 5px; text-decoration: none; display: inline-block; transition: 0.3s; cursor: pointer; border: none; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-outline { border: 2px white solid; color: white; margin-left: 10px; }
+        .section { padding: 50px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; overflow: hidden; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 20px; }
+        .price-tag { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+        
+        /* Floating Buttons */
+        .messenger-wrapper { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .float-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; font-size: 20px; font-weight: bold; }
+        .float-btn:hover { transform: scale(1.1); }
+        .wa { background: var(--whatsapp); }
+        .tg { background: var(--telegram); }
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+        .modal-content { background: white; margin: 5% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 10px; position: relative; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-family: inherit; }
+        .btn-block { width: 100%; font-size: 1.1rem; }
+        .close { position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">AutoDetail</div>
+    <nav>
+        <a href="#services">Услуги</a>
+        <a href="#pricing">Цены</a>
+        <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+    </nav>
+</header>
+
+<!-- Floating Messengers -->
+<div class="messenger-wrapper">
+    <a href="https://wa.me/79991234567" class="float-btn wa" target="_blank" title="Написать в WhatsApp">W</a>
+    <a href="https://t.me/your_username" class="float-btn tg" target="_blank" title="Написать в Telegram">T</a>
+</div>
+
+<section class="hero">
+    <h1>Премиальная мойка и detailing вашего авто</h1>
+    <p>Профессиональная мобильная мойка с выездом к клиенту.</p>
+    <div style="margin-top: 30px;">
+        <button class="btn btn-primary" onclick="openModal()">Записаться онлайн</button>
+        <a href="#pricing" class="btn btn-outline">Узнать цены</a>
+    </div>
+</section>
+
+<section class="section" id="services">
+    <h2>Наши услуги</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Мойка">
+            <div class="card-content">
+                <h3>Мойка кузова</h3>
+                <p>Тщательная мойка внешних поверхностей.</p>
+                <p class="price-tag">от 2 200 ₽</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=80" alt="Химчистка">
+            <div class="card-content">
+                <h3>Химчистка салона</h3>
+                <p>Глубокая чистка и устранение запахов.</p>
+                <p class="price-tag">от 5 000 ₽</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80" alt="Полировка">
+            <div class="card-content">
+                <h3>Полировка кузова</h3>
+                <p>Восстановление блеска и защита ЛКП.</p>
+                <p class="price-tag">от 8 000 ₽</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="pricing" style="background: var(--light);">
+    <h2 style="text-align: center;">Цены на пакеты</h2>
+    <div class="grid">
+        <div class="card" style="background: white; text-align: center; padding: 20px;">
+            <h3>Экспресс</h3>
+            <div class="price-tag" style="font-size: 2rem;">1 200 ₽</div>
+            <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                <li>Мойка кузова</li>
+                <li>Очистка стекол</li>
+            </ul>
+            <button class="btn btn-primary" onclick="openModal()">Выбрать</button>
+        </div>
+        <div class="card" style="background: white; text-align: center; padding: 20px; border: 2px solid var(--primary);">
+            <h3>Комплекс</h3>
+            <div class="price-tag" style="font-size: 2rem;">7 200 ₽</div>
+            <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                <li>Мойка + Химчистка</li>
+                <li>Полировка фар</li>
+                <li>Защитное покрытие</li>
+            </ul>
+            <button class="btn btn-primary" onclick="openModal()">Выбрать</button>
+        </div>
+    </div>
+</section>
+
+<div id="booking-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Запись на услугу</h2>
+        <form id="appointment-form">
+            <div class="form-group">
+                <label for="user-name">Ваше имя</label>
+                <input type="text" id="user-name" name="name" placeholder="Иван Иванов" required>
+            </div>
+            <div class="form-group">
+                <label for="user-phone">Телефон</label>
+                <input type="tel" id="user-phone" name="phone" placeholder="+7 (999) 000-00-00" required>
+            </div>
+            <div class="form-group">
+                <label for="car-details">Марка и модель авто</label>
+                <input type="text" id="car-details" name="car" placeholder="Напр. BMW X5" required>
+            </div>
+            <div class="form-group">
+                <label for="appointment-date">Желаемая дата и время</label>
+                <input type="datetime-local" id="appointment-date" name="date_time" required>
+            </div>
+            <div class="form-group">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" name="comment" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Подтвердить запись</button>
+        </form>
+    </div>
+</div>
+
+<footer style="background: var(--dark); color: white; padding: 40px 5%; text-align: center;">
+    <p>© 2025 AutoDetail. Все права защищены.</p>
+</footer>
+
+<script>
+    const modal = document.getElementById("booking-modal");
+    function openModal() { modal.style.display = "block"; }
+    function closeModal() { modal.style.display = "none"; }
+    window.onclick = function(event) { if (event.target == modal) closeModal(); }
+
+    document.getElementById('appointment-form').onsubmit = function(e) {
+        e.preventDefault();
+        alert("Заявка принята! Данные готовы для отправки");
+        closeModal();ронизации.");
+        closeModal();
+    }
